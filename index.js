@@ -1,5 +1,8 @@
+const scoreEl = document.querySelector("#scoreEl");
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
+
+console.log(scoreEl);
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -273,6 +276,8 @@ for (let i = 0; i < 100; i++) {
   );
 }
 
+let score = 0;
+
 function createParticles({ object, color, fades }) {
   for (let i = 0; i < 15; i++) {
     particles.push(
@@ -387,6 +392,9 @@ function animate() {
 
             // REMOVE ENEMY AND PROJECTILES
             if (invaderFound && projectileFound) {
+              score += 100;
+              // console.log(score);
+              scoreEl.innerHTML = score;
               createParticles({
                 object: invader,
                 fades: true,
