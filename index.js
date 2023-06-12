@@ -199,7 +199,7 @@ function animate() {
     }
   });
 
-  grids.forEach((grid) => {
+  grids.forEach((grid, gridIdx) => {
     grid.update();
     grid.invaders.forEach((invader, i) => {
       invader.update({ velocity: grid.velocity });
@@ -228,6 +228,13 @@ function animate() {
               if (grid.invaders.length > 0) {
                 const firstInvader = grid.invaders[0];
                 const lastInvader = grid.invaders[grid.invaders.length - 1];
+                grid.width =
+                  lastInvader.position.x -
+                  firstInvader.position.x +
+                  lastInvader.width;
+                grid.position.x = firstInvader.position.x;
+              } else {
+                grids.splice(gridIdx, 1);
               }
             }
           }, 0);
